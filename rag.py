@@ -1,5 +1,5 @@
 import os
-from llama_index.llms.gemini import Gemini
+from llama_index.llms.google_genai import GoogleGenAI
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, Settings
 
@@ -9,9 +9,10 @@ if not GOOGLE_API_KEY:
     raise ValueError("Please set the GOOGLE_API_KEY environment variable first.")
 
 # Configure Gemini LLM (for responses)
-llm = Gemini(model="models/gemini-1.5-flash", api_key=GOOGLE_API_KEY)
+llm = GoogleGenAI(model="gemini-2.5-flash", api_key=GOOGLE_API_KEY)
 
-# Configure HuggingFace Embeddings 
+
+# Configure HuggingFace Embeddings
 embed_model = HuggingFaceEmbedding(model_name="sentence-transformers/all-MiniLM-L6-v2")
 
 # Apply globally so LlamaIndex uses them everywhere

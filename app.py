@@ -1,7 +1,7 @@
 import os
 import re 
 import streamlit as st
-from llama_index.llms.gemini import Gemini
+from llama_index.llms.google_genai import GoogleGenAI
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, Settings
 
@@ -16,7 +16,7 @@ if not GOOGLE_API_KEY:
     st.stop()
 
 # Configure LLM + Embeddings
-llm = Gemini(model="models/gemini-1.5-flash", api_key=GOOGLE_API_KEY)
+llm = GoogleGenAI(model="models/gemini-2.5-flash", api_key=GOOGLE_API_KEY)
 embed_model = HuggingFaceEmbedding(model_name="sentence-transformers/all-MiniLM-L6-v2")
 
 Settings.llm = llm
@@ -28,7 +28,7 @@ Settings.embed_model = embed_model
 
 st.set_page_config(page_title="AI Research Assistant", page_icon="🤖", layout="wide")
 
-st.title("📘 AI Research Assistant")
+st.title("📘 Document AI")
 st.markdown("Ask questions about your own documents using **RAG + Gemini**")
 
 # Sidebar for document loading
