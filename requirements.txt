@@ -1,5 +1,5 @@
 streamlit
-llamaindex
+llama-index
 sentence-transformers
 openai
 google-generativeai
