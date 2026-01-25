@@ -1,0 +1,5 @@
+streamlit
+llamaindex
+sentence-transformers
+openai
+google-generativeai

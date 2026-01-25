@@ -9,15 +9,15 @@ if not GOOGLE_API_KEY:
     raise ValueError(
         "Please set the GOOGLE_API_KEY environment variable first.")
 
-# Configure Gemini LLM (for responses)
+# Gemini LLM 
 llm = GoogleGenAI(model="gemini-2.5-flash", api_key=GOOGLE_API_KEY)
 
 
-# Configure HuggingFace Embeddings
+# HuggingFace Embeddings
 embed_model = HuggingFaceEmbedding(
     model_name="sentence-transformers/all-MiniLM-L6-v2")
 
-# Apply globally so LlamaIndex uses them everywhere
+
 Settings.llm = llm
 Settings.embed_model = embed_model
 

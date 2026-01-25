@@ -1,9 +1,7 @@
 import streamlit as st
 import requests
 
-# --------------------------
-# Custom CSS to match the image
-# --------------------------
+
 def load_css():
     """Injects custom CSS to style the Streamlit app."""
     css = """
@@ -109,30 +107,29 @@ def load_css():
     """
     st.markdown(css, unsafe_allow_html=True)
 
-# --------------------------
+
 # Streamlit UI
-# --------------------------
+
 
 # Set page config
 st.set_page_config(
     page_title="Document AI",
-    page_icon="📄",  # Updated icon
-    layout="centered"  # Changed from "wide" to "centered"
+    page_icon="📄",  
+    layout="centered"  
 )
 
-# Inject our custom CSS
+
 load_css()
 
-# --- Header ---
-# Replaced st.title with markdown for icon
+
+
 st.markdown("<h1>📄 Document AI</h1>", unsafe_allow_html=True)
 st.markdown(
     "<p class='subtitle'>Ask questions about your own documents using RAG + Gemini (via FastAPI)</p>",
     unsafe_allow_html=True
 )
 
-# --- Input Form ---
-# Updated label and added placeholder from image
+
 query = st.text_input(
     "🔹 Ask a question about your documents:",
     placeholder="summarize the resume(6).pdf in 3 points"
@@ -153,24 +150,24 @@ if st.button("Get Answer"):
                     data = response.json()
                     answer = data.get("answer", "No answer found.")
 
-                    # --- Display Answer ---
-                    st.subheader("✅ Answer:") # This matches the green check in the image
+                    
+                    st.subheader("✅ Answer:") 
 
-                    # Try to format the answer as a list, like in the image
+                    
                     if isinstance(answer, list):
                         for point in answer:
                             st.markdown(
                                 f"<p class='answer-item'><span class='answer-item-check'>✔</span> {point}</p>",
                                 unsafe_allow_html=True
                             )
-                    elif '\n' in answer: # Try splitting by newlines
+                    elif '\n' in answer: 
                         answer_points = [p for p in answer.split('\n') if p.strip()]
                         for point in answer_points:
                             st.markdown(
                                 f"<p class='answer-item'><span class='answer-item-check'>✔</span> {point}</p>",
                                 unsafe_allow_html=True
                             )
-                    else: # Otherwise, just display the string
+                    else: 
                         st.markdown(
                             f"<p class='answer-item'><span class='answer-item-check'>✔</span> {answer}</p>",
                             unsafe_allow_html=True
